@@ -20,11 +20,11 @@ model Course {
   title       String  @db.Text
   description String? @db.Text
   imgUrl      String? @db.Text
-  price       Float
+  price       Float?
   isPublised  Boolean @default(false)
 
   categoryId String?
-  category Category? @relation(fields: [categoryId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id])
 
   attachments Attachment[]
 
@@ -34,17 +34,17 @@ model Course {
   @@index([categoryId])
 }
 
-model Category{
-  id String @id @default(uuid())
-  name String @unique
+model Category {
+  id      String   @id @default(uuid())
+  name    String   @unique
   courses Course[]
 }
 
 model Attachment {
-  id       String  @id @default(uuid())
-  name     String
-  url      String  @db.Text
-  
+  id   String @id @default(uuid())
+  name String
+  url  String @db.Text
+
   courseId String
   Course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
