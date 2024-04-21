@@ -65,7 +65,7 @@ const CreatePage = () => {
                     <Input
                       disabled={isSubmitting}
                       {...field}
-                      placeholder="eg: 'Advanced Web Development'"
+                      placeholder="e.g. 'Advanced Web Development'"
                     />
                   </FormControl>
                   <FormDescription>
