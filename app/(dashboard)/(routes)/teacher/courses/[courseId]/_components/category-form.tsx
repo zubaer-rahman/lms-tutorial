@@ -17,20 +17,25 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { Combobox } from "@/components/ui/combobox";
 import { Course } from "@prisma/client";
 
 const formSchema = z.object({
-  description: z.string().min(1, "Description is required"),
+  categoryId: z.string().min(1),
 });
 
-interface DescriptionFormProps {
+interface CategoryFormProps {
   initialData: Course;
   courseId: string;
+  options: { label: string; value: string }[];
 }
 
-const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
+const CategoryForm = ({
+  initialData,
+  courseId,
+  options,
+}: CategoryFormProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
@@ -39,7 +44,7 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
   };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { description: initialData?.description || "" },
+    defaultValues: { categoryId: initialData?.categoryId || "" },
   });
   const { isSubmitting, isValid } = form.formState;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -52,17 +57,20 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
       toast.error("Something went wrong");
     }
   };
+  const selectedOption = options.find(
+    (option) => option.value === initialData?.categoryId
+  )?.label;
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course Description
+        Course category
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <>Cancel</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit description
+              Edit category
             </>
           )}
         </Button>
@@ -71,10 +79,10 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
         <p
           className={cn(
             "text-sm mt-2",
-            !initialData?.description && "italic text-slate-500"
+            !initialData?.categoryId && "italic text-slate-500"
           )}
         >
-          {initialData?.description || "No description"}
+          {selectedOption || "No category"}
         </p>
       )}
       {isEditing && (
@@ -85,15 +93,11 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
           >
             <FormField
               control={form.control}
-              name="description"
+              name="categoryId"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea
-                      disabled={isSubmitting}
-                      {...field}
-                      placeholder="e.g. 'This course is about...'"
-                    />
+                    <Combobox options={...options } {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,4 +115,4 @@ const DescriptionForm = ({ initialData, courseId }: DescriptionFormProps) => {
   );
 };
 
-export default DescriptionForm;
+export default CategoryForm;
