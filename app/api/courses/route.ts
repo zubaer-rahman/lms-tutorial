@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
@@ -14,8 +14,8 @@ export async function POST(req: Request) {
     const course = await db.course.create({
       data: {
         userId,
-        title
-       },
+        title,
+      },
     });
     return NextResponse.json(course);
   } catch (error) {
