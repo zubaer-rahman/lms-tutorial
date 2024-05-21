@@ -18,9 +18,11 @@
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
+    "@tanstack/react-table": "^8.17.3",
     "@uploadthing/react": "^6.4.4",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
@@ -28,11 +30,13 @@
     "cmdk": "^1.0.0",
     "lucide-react": "^0.368.0",
     "next": "14.2.1",
+    "query-string": "^9.0.0",
     "react": "^18",
     "react-confetti": "^6.1.0",
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",
     "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
     "react-quill": "^2.0.0",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
@@ -50,5 +54,6 @@
     "prisma": "^5.12.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@9.0.5+sha512.a722575c18fd791f9ef71e387c6e16cc03c90d859b9b0998d0428ca0e3220828b32a96e6de73cea34edbc0f50824771b1a69c7ea36b86daa3b89c7e6d9a3d912"
 }

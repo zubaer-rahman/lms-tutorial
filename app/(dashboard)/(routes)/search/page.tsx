@@ -1,5 +1,17 @@
-const search = () => {
-  return <div>This is search page!</div>;
+import { db } from "@/lib/db";
+import Categories from "./_components/categories";
+
+const Page = async () => {
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
+  return (
+    <div className="p-6">
+      <Categories items={categories} />
+    </div>
+  );
 };
 
-export default search;
+export default Page;
