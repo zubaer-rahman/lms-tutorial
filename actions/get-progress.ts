@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 
 export const getProgress = async (
-  userId: string,
+  userId: string | null,
   courseId: string
 ): Promise<number> => {
   try {

@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -15,13 +16,13 @@ datasource db {
 }
 
 model Course {
-  id          String  @id @default(uuid())
+  id          String       @id @default(uuid())
   userId      String
-  title       String  @db.Text
-  description String? @db.Text
-  imgUrl      String? @db.Text
+  title       String       @db.Text
+  description String?      @db.Text
+  imgUrl      String?      @db.Text
   price       Float?
-  isPublished  Boolean @default(false)
+  isPublished Boolean      @default(false)
   categoryId  String?
   category    Category?    @relation(fields: [categoryId], references: [id])
   chapters    Chapter[]
@@ -31,6 +32,7 @@ model Course {
   updatedAt   DateTime     @updatedAt
 
   @@index([categoryId])
+  @@fulltext([title])
 }
 
 model Category {
@@ -81,7 +83,7 @@ model MuxData {
 
 model UserProgress {
   id          String   @id @default(uuid())
-  userId      String
+  userId      String?
   chapterId   String
   chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
   isCompleted Boolean  @default(false)
@@ -94,7 +96,7 @@ model UserProgress {
 
 model Purchase {
   id     String @id @default(uuid())
-  userId String
+  userId String?
 
   courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
