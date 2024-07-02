@@ -61,7 +61,37 @@ export const getchapter = async ({
           chapterId,
         },
       });
+
+      nextChapter = await db.chapter.findFirst({
+        where: {
+          courseId,
+          isPublished: true,
+          position: {
+            gt: chapter?.position,
+          },
+        },
+        orderBy: {
+          position: "asc",
+        },
+      });
     }
+    const userProgress = await db.userProgress.findUnique({
+      where: {
+        userId_chapterId: {
+          userId,
+          chapterId,
+        },
+      },
+    });
+    return {
+      chapter ,
+      course ,
+      muxData ,
+      attachments ,
+      nextChapter ,
+      userProgress ,
+      purchase ,
+    };
   } catch (error) {
     console.log("[GET_CHAPTER]", error);
     return {
