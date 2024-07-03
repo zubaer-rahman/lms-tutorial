@@ -6,6 +6,7 @@ import VideoPlayer from "./_components/video-player";
 import { CourseEnrollButton } from "./_components/course-enroll-button";
 import { Separator } from "@/components/ui/separator";
 import { Preview } from "@/components/preview";
+import { File } from "lucide-react";
 
 const ChapterIdPage = async ({
   params,
@@ -87,7 +88,8 @@ const ChapterIdPage = async ({
                   target="_blank"
                   className="flex items-center p-3 w-full bg-sky-200 border text-sky-700 rounded-m hover:underline"
                 >
-                  <p>{attachment.name}</p>
+                  <File />
+                  <p className="line-clamp-1">{attachment.name}</p>
                 </a>
               ))}
             </div>
