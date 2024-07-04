@@ -10,8 +10,7 @@ export async function POST(
 ) {
   try {
     const user = await currentUser();
-    console.log(user);
-    
+
     if (!user || !user.id || !user.emailAddresses?.[0]?.emailAddress) {
       return new NextResponse("Unauthorized", { status: 401 });
     }

@@ -92,7 +92,7 @@ const ChapterIdPage = async ({
                   <p className="line-clamp-1">{attachment.name}</p>
                 </a>
               ))}
-            </div>
+             </div>
           </>
         )}
       </div>

@@ -103,6 +103,7 @@ export async function PATCH(
         playback_policy: ["public"],
         test: false,
       });
+
       await db.muxData.create({
         data: {
           assetId: asset.id,
