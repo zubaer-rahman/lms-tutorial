@@ -26,7 +26,7 @@ export const getProgress = async (
       },
     });
     const progressPercentage =
-      (validCompletedChapters / publishedChapterIds.length) * 100;
+      (validCompletedChapters / publishedChapterIds.length) * 100 || 0;
     return progressPercentage;
   } catch (error) {
     console.log("GET_PROGRESS", error);
